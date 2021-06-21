@@ -2,41 +2,27 @@ package main
 
 import (
 	"links_cutter/commands"
+	"links_cutter/helpers"
 	"net/http"
+	"strings"
 )
 
-func (app *Application) get(w http.ResponseWriter, r *http.Request) {
+func (app *Application) home(w http.ResponseWriter, r *http.Request) {
 	defer r.Body.Close()
 
-	if r.Method != http.MethodGet {
-		http.Error(w, http.StatusText(http.StatusMethodNotAllowed), http.StatusMethodNotAllowed)
+	path := strings.Split(r.URL.Path, "/")
+	shortUrl := path[len(path)-1]
+
+	longUrl, err := commands.GetURL(shortUrl)
+	if err != nil {
+		http.Error(w, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
+		app.ErrorLog.Print(err)
 		return
 	}
 
-	shortUrl := r.URL.Query().Get("url")
-
-	longUrl := commands.GetURL(shortUrl)
-
-	_, err := w.Write([]byte(longUrl))
-	if err != nil {
-		app.ErrorLog.Fatal(err)
-	}
-}
-
-func (app *Application) create(w http.ResponseWriter, r *http.Request) {
-	defer r.Body.Close()
-
-	if r.Method != http.MethodPost {
-		http.Error(w, http.StatusText(http.StatusMethodNotAllowed), http.StatusMethodNotAllowed)
+	if err := helpers.OpenBrowser(longUrl); err != nil {
+		http.Error(w, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
+		app.ErrorLog.Print(err)
 		return
-	}
-
-	longURL := r.URL.Query().Get("url")
-
-	shortURL := commands.CreateURL(longURL)
-
-	_, err := w.Write([]byte(shortURL))
-	if err != nil {
-		app.ErrorLog.Fatal(err)
 	}
 }
