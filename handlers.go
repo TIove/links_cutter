@@ -2,21 +2,27 @@ package main
 
 import (
 	"links_cutter/commands"
+	"links_cutter/helpers"
 	"net/http"
+	"strings"
 )
 
-func (app *Application) get(w http.ResponseWriter, r *http.Request) { // Add get
-	shortUrl := r.URL.Query().Get("url")
+func (app *Application) home(w http.ResponseWriter, r *http.Request) {
+	defer r.Body.Close()
 
-	longUrl := commands.GetURL(shortUrl)
+	path := strings.Split(r.URL.Path, "/")
+	shortUrl := path[len(path)-1]
 
-	w.Write([]byte(longUrl))
-}
+	longUrl, err := commands.GetURL(shortUrl)
+	if err != nil {
+		http.Error(w, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
+		app.ErrorLog.Print(err)
+		return
+	}
 
-func (app *Application) create(w http.ResponseWriter, r *http.Request) { // Add post
-	longURL := r.URL.Query().Get("url")
-
-	shortURL := commands.CreateURL(longURL)
-
-	w.Write([]byte(shortURL))
+	if err := helpers.OpenBrowser(longUrl); err != nil {
+		http.Error(w, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
+		app.ErrorLog.Print(err)
+		return
+	}
 }

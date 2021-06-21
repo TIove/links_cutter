@@ -12,6 +12,5 @@ func (app *Application) routes() *http.ServeMux {
 }
 
 func userRoutes(app *Application, mux *http.ServeMux) {
-	mux.HandleFunc("/create", app.create)
-	mux.HandleFunc("/get", app.get)
+	mux.HandleFunc("/", app.home)
 }

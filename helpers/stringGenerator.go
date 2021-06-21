@@ -16,6 +16,7 @@ func GetUUID() string {
 	for i := 0; i < KeyLength; i++ {
 		token += string(alphabet[cryptoRandSecure(int64(len(alphabet)))])
 	}
+
 	return token
 }
 
@@ -24,5 +25,6 @@ func cryptoRandSecure(max int64) int64 {
 	if err != nil {
 		log.Println(err)
 	}
+
 	return nBig.Int64()
 }
