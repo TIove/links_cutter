@@ -2,13 +2,13 @@ package main
 
 import (
 	"google.golang.org/grpc"
-	cutter_proto "links_cutter/api"
+	cutter "links_cutter/api"
 	"net"
 	"net/http"
 )
 
 type server struct {
-	cutter_proto.UnimplementedCutterServer
+	cutter.UnimplementedCutterServer
 }
 
 func main() {
@@ -39,7 +39,7 @@ func upGrpcServer() {
 
 	s := grpc.NewServer()
 
-	cutter_proto.RegisterCutterServer(s, &server{})
+	cutter.RegisterCutterServer(s, &server{})
 	if err := s.Serve(lis); err != nil {
 		app.ErrorLog.Fatalf("Failed to serve: %v", err)
 	}

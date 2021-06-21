@@ -5,18 +5,38 @@ import (
 	"net/http"
 )
 
-func (app *Application) get(w http.ResponseWriter, r *http.Request) { // Add get
+func (app *Application) get(w http.ResponseWriter, r *http.Request) {
+	defer r.Body.Close()
+
+	if r.Method != http.MethodGet {
+		http.Error(w, http.StatusText(http.StatusMethodNotAllowed), http.StatusMethodNotAllowed)
+		return
+	}
+
 	shortUrl := r.URL.Query().Get("url")
 
 	longUrl := commands.GetURL(shortUrl)
 
-	w.Write([]byte(longUrl))
+	_, err := w.Write([]byte(longUrl))
+	if err != nil {
+		app.ErrorLog.Fatal(err)
+	}
 }
 
-func (app *Application) create(w http.ResponseWriter, r *http.Request) { // Add post
+func (app *Application) create(w http.ResponseWriter, r *http.Request) {
+	defer r.Body.Close()
+
+	if r.Method != http.MethodPost {
+		http.Error(w, http.StatusText(http.StatusMethodNotAllowed), http.StatusMethodNotAllowed)
+		return
+	}
+
 	longURL := r.URL.Query().Get("url")
 
 	shortURL := commands.CreateURL(longURL)
 
-	w.Write([]byte(shortURL))
+	_, err := w.Write([]byte(shortURL))
+	if err != nil {
+		app.ErrorLog.Fatal(err)
+	}
 }
