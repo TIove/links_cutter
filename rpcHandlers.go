@@ -15,9 +15,9 @@ func (s *server) Create(ctx context.Context, in *cutter_proto.UrlRequest) (*cutt
 }
 
 func (s *server) Get(ctx context.Context, in *cutter_proto.UrlRequest) (*cutter_proto.UrlResponse, error) {
-	longURL := commands.GetURL(in.Url)
+	longURL, err := commands.GetURL(in.Url)
 
 	return &cutter_proto.UrlResponse{
 		Url: longURL,
-	}, nil
+	}, err
 }
