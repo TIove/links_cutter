@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+option go_package = "api/cutter.proto";
+option java_multiple_files = true;
+option java_package = "io.grpc.cutter";
+option java_outer_classname = "Cutter";
+
+package api;
+
+service Cutter {
+  rpc Get(UrlRequest) returns (UrlResponse) {}
+  rpc Create(UrlRequest) returns (UrlResponse) {}
+}
+
+message UrlRequest {
+  string url = 1;
+}
+
+message UrlResponse {
+  string url = 1;
+}
+
