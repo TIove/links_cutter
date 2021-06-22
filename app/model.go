@@ -15,3 +15,4 @@ type Application struct {
 	InfoLog  *log.Logger
 	Db       *DbModel
 }
+

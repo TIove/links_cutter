@@ -8,7 +8,7 @@ import (
 func CreateURL(longURL string) string {
 	shortURL := helpers.GetUUID()
 
-	app.SetValue(shortURL, longURL)
+	 app.SetValue(shortURL, longURL)
 
 	return shortURL
 }
