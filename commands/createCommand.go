@@ -1,14 +1,14 @@
 package commands
 
 import (
-	"links_cutter/database"
+	"links_cutter/app"
 	"links_cutter/helpers"
 )
 
 func CreateURL(longURL string) string {
-	 shortURL := helpers.GetUUID()
+	shortURL := helpers.GetUUID()
 
-	 database.SetValue(shortURL, longURL)
+	app.SetValue(shortURL, longURL)
 
-	 return shortURL
+	return shortURL
 }
