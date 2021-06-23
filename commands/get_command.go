@@ -1,7 +1,9 @@
 package commands
 
-import "links_cutter/database"
+import (
+	"links_cutter/app"
+)
 
 func GetURL(shortURL string) (string, error) {
-	return database.GetValue(shortURL)
+	return app.GetValue(shortURL)
 }
