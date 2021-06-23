@@ -4,16 +4,14 @@
 ---
 ## To install app
 ```
-go get -u github.com/zhashkevych/go-sqlxmock@master
+go get -u github.com/TIove/links_cutter@master
 ```
-## Docker image
-```
-hub.docker.com/r/tiove/links_cutter
-```
-## Get docker image
+## Docker image - [Docker Hub](hub.docker.com/r/tiove/links_cutter)
+
+* ### Get docker image
 ```
 docker pull tiove/links_cutter
 ```
- 
+---
 # Technical details
 * `gRPC is listening port 50051`
