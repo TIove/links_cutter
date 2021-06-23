@@ -6,13 +6,11 @@ import (
 	"time"
 )
 
-type AppDb struct {
+type Db struct {
 	ErrorLog *log.Logger
 	InfoLog  *log.Logger
 	Db       *DbModel
 }
-
-//var urls = make(map[string]string)
 
 func GetValue(key string) (string, error) {
 	val, err := App.Db.Get(key)
@@ -26,12 +24,19 @@ func GetValue(key string) (string, error) {
 	return result, nil
 }
 
-func SetValue(key string, value string) {
-	request := models.Link{ShortURL: key, LongURL: value, CreatedAt: time.Now()}
+func SetValue(key string, value string) string {
+	request := models.Link{
+		ShortURL:  key,
+		LongURL:   value,
+		CreatedAt: time.Now(),
+	}
 
-	_, err := App.Db.Insert(request)
+	res, err := App.Db.Insert(request)
+	if res != nil {
+		return res.ShortURL
+	}
 	if err != nil {
 		App.ErrorLog.Print(err)
-		return
 	}
+	return ""
 }

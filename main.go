@@ -7,6 +7,7 @@ import (
 	. "github.com/TIove/links_cutter/app"
 	_ "github.com/lib/pq"
 	"google.golang.org/grpc"
+	"log"
 	"net"
 	"os"
 )
@@ -18,6 +19,10 @@ type server struct {
 func main() {
 	user := os.Getenv("user")
 	password := os.Getenv("password")
+	if user == "" || password == "" {
+		log.Fatal("user or password of db is incorrect")
+	}
+
 	dbCredentials := fmt.Sprintf("user=%s password=%s dbname=postgres sslmode=disable", user, password)
 	db, err := openDb("postgres", dbCredentials)
 
