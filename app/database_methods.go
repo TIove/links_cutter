@@ -2,7 +2,7 @@ package app
 
 import (
 	"database/sql"
-	"links_cutter/models"
+	"github.com/TIove/links_cutter/models"
 )
 
 type DbModel struct {

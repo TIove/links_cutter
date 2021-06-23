@@ -1,4 +1,4 @@
-module links_cutter
+module github.com/TIove/links_cutter
 
 go 1.16
 

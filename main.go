@@ -3,10 +3,10 @@ package main
 import (
 	"database/sql"
 	"fmt"
+	cutter "github.com/TIove/links_cutter/api"
+	. "github.com/TIove/links_cutter/app"
 	_ "github.com/lib/pq"
 	"google.golang.org/grpc"
-	cutter "links_cutter/api"
-	. "links_cutter/app"
 	"net"
 	"os"
 )
