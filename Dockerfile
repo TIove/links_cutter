@@ -1,3 +1,4 @@
+
 FROM golang:1.16.5
 
 ADD . /go/src/github.com/TIove/links_cutter
