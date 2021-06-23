@@ -10,7 +10,7 @@ type AppDb struct {
 	ErrorLog *log.Logger
 	InfoLog  *log.Logger
 	Db       *DbModel
-)
+}
 
 //var urls = make(map[string]string)
 
