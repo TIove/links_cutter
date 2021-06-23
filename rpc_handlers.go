@@ -2,8 +2,8 @@ package main
 
 import (
 	"context"
-	cutterProto "links_cutter/api"
-	"links_cutter/commands"
+	cutterProto "github.com/TIove/links_cutter/api"
+	"github.com/TIove/links_cutter/commands"
 )
 
 func (s *server) Create(_ context.Context, in *cutterProto.UrlRequest) (*cutterProto.UrlResponse, error) {

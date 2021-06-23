@@ -1,7 +1,7 @@
 package commands
 
 import (
-	"links_cutter/app"
+	"github.com/TIove/links_cutter/app"
 )
 
 func GetURL(shortURL string) (string, error) {

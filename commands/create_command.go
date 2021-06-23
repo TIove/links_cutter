@@ -1,8 +1,8 @@
 package commands
 
 import (
-	"links_cutter/app"
-	"links_cutter/helpers"
+	"github.com/TIove/links_cutter/app"
+	"github.com/TIove/links_cutter/helpers"
 )
 
 func CreateURL(longURL string) string {

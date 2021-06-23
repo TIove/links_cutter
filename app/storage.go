@@ -1,7 +1,7 @@
 package app
 
 import (
-	"links_cutter/models"
+	"github.com/TIove/links_cutter/models"
 	"log"
 	"time"
 )
@@ -9,7 +9,7 @@ import (
 type AppDb struct {
 	ErrorLog *log.Logger
 	InfoLog  *log.Logger
-	Db *DbModel
+	Db       *DbModel
 }
 
 //var urls = make(map[string]string)
